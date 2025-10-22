@@ -39,16 +39,16 @@ export const logMessage = (message: AIMessage) => {
 
   // Log assistant messages
   if (role === 'assistant') {
-    // If has tool_calls, log function name
-    if ('tool_calls' in message && message.tool_calls) {
-      message.tool_calls.forEach((tool) => {
+    // If has non-empty tool_calls, log function names and return
+    if (Array.isArray((message as any).tool_calls) && (message as any).tool_calls.length > 0) {
+      (message as any).tool_calls.forEach((tool: any) => {
         console.log(`\n${color}[ASSISTANT]${reset}`)
         console.log(`${tool.function.name}\n`)
       })
       return
     }
 
-    // If has content, log it
+    // Otherwise log assistant content (including empty string will be skipped)
     if (message.content) {
       console.log(`\n${color}[ASSISTANT]${reset}`)
       console.log(`${message.content}\n`)

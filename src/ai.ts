@@ -1,3 +1,5 @@
-import OpenAI from 'openai'
+// import { GoogleGenerativeAI } from "@google/generative-ai";
 
-export const openai = new OpenAI()
+// const genAI = new GoogleGenerativeAI(process.env.MISTRAL_API_KEY!);
+
+// export { genAI };

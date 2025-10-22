@@ -1,7 +1,6 @@
 # Build an AI Agent from Scratch Workshop
 
-- Watch the workshop on [Frontend Masters](https://frontendmasters.com/workshops/build-ai-agent/). 
-- View the [course notes](https://clumsy-humor-894.notion.site/Agent-from-scratch-13554fed51a380749554c44aa8989406?pvs=4)
+- Making an agent with toolchain capability.
 
 ## Setup Instructions
 
@@ -24,10 +23,10 @@ npm start
 bun run index.ts
 ```
 
-## OpenAI API Key
+## MISTRAL API Key
 
 Create an [API Key from OpenAI](https://platform.openai.com/settings/organization/api-keys) and save it in a `.env` file:
 
 ```
-OPENAI_API_KEY='YOUR_API_KEY'
+MISTRAL_API_KEY='YOUR_API_KEY'
 ```
