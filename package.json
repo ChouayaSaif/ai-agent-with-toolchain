@@ -3,7 +3,9 @@
   "module": "index.ts",
   "type": "module",
   "scripts": {
-    "start": "npx tsx index.ts"
+  "start": "npx tsx index.ts",
+  "eval": "npx tsx evals/run.ts",
+    "ingest": "npx tsx src/rag/ingest.ts"
   },
   "overrides": {
     "whatwg-url": "13.0.0"
@@ -15,6 +17,10 @@
     "typescript": "^5.0.0"
   },
   "dependencies": {
+    "@upstash/vector": "^1.1.7",
+    "autoevals": "^0.0.101",
+    "chalk": "^5.3.0",
+    "csv-parse": "^5.5.6",
     "@google/generative-ai": "^0.24.1",
     "dotenv": "^16.4.5",
     "got": "^14.4.4",

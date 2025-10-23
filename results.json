@@ -1,0 +1,468 @@
+{
+  "experiments": [
+    {
+      "name": "reddit",
+      "sets": [
+        {
+          "runs": [
+            {
+              "input": "tell me something cool from reddit",
+              "output": {
+                "role": "assistant",
+                "content": "",
+                "tool_calls": [
+                  {
+                    "id": "WcQAVwboV",
+                    "function": {
+                      "name": "reddit",
+                      "arguments": "{}"
+                    },
+                    "index": 0
+                  }
+                ]
+              },
+              "expected": {
+                "role": "assistant",
+                "tool_calls": [
+                  {
+                    "type": "function",
+                    "function": {
+                      "name": "reddit"
+                    }
+                  }
+                ]
+              },
+              "scores": [
+                {
+                  "name": "ToolCallMatch",
+                  "score": 1
+                }
+              ],
+              "createdAt": "2025-10-22T20:29:00.009Z"
+            }
+          ],
+          "score": 1,
+          "createdAt": "2025-10-22T20:29:00.009Z"
+        },
+        {
+          "runs": [
+            {
+              "input": "tell me something cool from reddit",
+              "output": {
+                "role": "assistant",
+                "content": "",
+                "tool_calls": [
+                  {
+                    "id": "fJrKsBqUi",
+                    "function": {
+                      "name": "reddit",
+                      "arguments": "{}"
+                    },
+                    "index": 0
+                  }
+                ]
+              },
+              "expected": {
+                "role": "assistant",
+                "tool_calls": [
+                  {
+                    "type": "function",
+                    "function": {
+                      "name": "reddit"
+                    }
+                  }
+                ]
+              },
+              "scores": [
+                {
+                  "name": "ToolCallMatch",
+                  "score": 1
+                }
+              ],
+              "createdAt": "2025-10-22T20:29:53.326Z"
+            }
+          ],
+          "score": 1,
+          "createdAt": "2025-10-22T20:29:53.326Z"
+        },
+        {
+          "runs": [
+            {
+              "input": "tell me something cool from reddit",
+              "output": {
+                "role": "assistant",
+                "content": "",
+                "tool_calls": [
+                  {
+                    "id": "h0tVy1a1N",
+                    "function": {
+                      "name": "reddit",
+                      "arguments": "{}"
+                    },
+                    "index": 0
+                  }
+                ]
+              },
+              "expected": {
+                "role": "assistant",
+                "tool_calls": [
+                  {
+                    "type": "function",
+                    "function": {
+                      "name": "reddit"
+                    }
+                  }
+                ]
+              },
+              "scores": [
+                {
+                  "name": "ToolCallMatch",
+                  "score": 1
+                }
+              ],
+              "createdAt": "2025-10-23T10:30:37.329Z"
+            },
+            {
+              "input": "hi",
+              "output": {
+                "role": "assistant",
+                "content": "Hello! How can I assist you today?",
+                "tool_calls": []
+              },
+              "expected": {
+                "role": "assistant",
+                "tool_calls": [
+                  {
+                    "type": "function",
+                    "function": {
+                      "name": "reddit"
+                    }
+                  }
+                ]
+              },
+              "scores": [
+                {
+                  "name": "ToolCallMatch",
+                  "score": 0
+                }
+              ],
+              "createdAt": "2025-10-23T10:30:37.330Z"
+            }
+          ],
+          "score": 0.5,
+          "createdAt": "2025-10-23T10:30:37.330Z"
+        },
+        {
+          "runs": [
+            {
+              "input": "tell me something cool from reddit",
+              "output": {
+                "role": "assistant",
+                "content": "",
+                "tool_calls": [
+                  {
+                    "id": "zFmzHbZ9P",
+                    "function": {
+                      "name": "reddit",
+                      "arguments": "{}"
+                    },
+                    "index": 0
+                  }
+                ]
+              },
+              "expected": {
+                "role": "assistant",
+                "tool_calls": [
+                  {
+                    "type": "function",
+                    "function": {
+                      "name": "reddit"
+                    }
+                  }
+                ]
+              },
+              "scores": [
+                {
+                  "name": "ToolCallMatch",
+                  "score": 1
+                }
+              ],
+              "createdAt": "2025-10-23T10:32:57.132Z"
+            },
+            {
+              "input": "hi",
+              "output": {
+                "role": "assistant",
+                "content": "Hello! How can I assist you today?",
+                "tool_calls": []
+              },
+              "expected": {
+                "role": "assistant",
+                "tool_calls": [
+                  {
+                    "type": "function",
+                    "function": {
+                      "name": "reddit"
+                    }
+                  }
+                ]
+              },
+              "scores": [
+                {
+                  "name": "ToolCallMatch",
+                  "score": 0
+                }
+              ],
+              "createdAt": "2025-10-23T10:32:57.132Z"
+            }
+          ],
+          "score": 0.5,
+          "createdAt": "2025-10-23T10:32:57.132Z"
+        }
+      ]
+    },
+    {
+      "name": "dadJoke",
+      "sets": [
+        {
+          "runs": [
+            {
+              "input": "tell me a funny dad joke",
+              "output": {
+                "role": "assistant",
+                "content": "",
+                "tool_calls": [
+                  {
+                    "id": "gHRYObonm",
+                    "function": {
+                      "name": "dad_joke",
+                      "arguments": "{}"
+                    },
+                    "index": 0
+                  }
+                ]
+              },
+              "expected": {
+                "role": "assistant",
+                "tool_calls": [
+                  {
+                    "type": "function",
+                    "function": {
+                      "name": "dad_joke"
+                    }
+                  }
+                ]
+              },
+              "scores": [
+                {
+                  "name": "ToolCallMatch",
+                  "score": 1
+                }
+              ],
+              "createdAt": "2025-10-23T10:39:01.447Z"
+            }
+          ],
+          "score": 1,
+          "createdAt": "2025-10-23T10:39:01.447Z"
+        }
+      ]
+    },
+    {
+      "name": "generateImage",
+      "sets": [
+        {
+          "runs": [
+            {
+              "input": "Generate an image of a sunset",
+              "output": {
+                "role": "assistant",
+                "content": "",
+                "tool_calls": [
+                  {
+                    "id": "DUm1y2kJG",
+                    "function": {
+                      "name": "generate_image",
+                      "arguments": "{\"_def\": {\"unknownKeys\": \"strip\", \"catchall\": {\"_def\": {\"typeName\": \"ZodNever\"}, \"~standard\": {\"version\": 1, \"vendor\": \"zod\"}}, \"typeName\": \"ZodObject\", \"description\": \"Generates an image using AI model\"}, \"~standard\": {\"version\": 1, \"vendor\": \"zod\"}, \"_cached\": null, \"prompt\": \"a beautiful sunset\"}"
+                    },
+                    "index": 0
+                  }
+                ]
+              },
+              "expected": {
+                "role": "assistant",
+                "tool_calls": [
+                  {
+                    "type": "function",
+                    "function": {
+                      "name": "generate_image"
+                    }
+                  }
+                ]
+              },
+              "scores": [
+                {
+                  "name": "ToolCallMatch",
+                  "score": 1
+                }
+              ],
+              "createdAt": "2025-10-23T10:42:41.961Z"
+            }
+          ],
+          "score": 1,
+          "createdAt": "2025-10-23T10:42:41.961Z"
+        }
+      ]
+    },
+    {
+      "name": "allTools",
+      "sets": [
+        {
+          "runs": [
+            {
+              "input": "tell me something interesting from reddit",
+              "output": {
+                "role": "assistant",
+                "content": "",
+                "tool_calls": [
+                  {
+                    "id": "xwfADI1rZ",
+                    "function": {
+                      "name": "reddit",
+                      "arguments": "{}"
+                    },
+                    "index": 0
+                  }
+                ]
+              },
+              "expected": {
+                "role": "assistant",
+                "tool_calls": [
+                  {
+                    "type": "function",
+                    "function": {
+                      "name": "reddit"
+                    }
+                  }
+                ]
+              },
+              "scores": [
+                {
+                  "name": "ToolCallMatch",
+                  "score": 1
+                }
+              ],
+              "createdAt": "2025-10-23T10:51:02.202Z"
+            },
+            {
+              "input": "generate an image of a mountain landscape",
+              "output": {
+                "role": "assistant",
+                "content": "",
+                "tool_calls": [
+                  {
+                    "id": "le4tXIexB",
+                    "function": {
+                      "name": "generate_image",
+                      "arguments": "{\"type\": \"object\", \"properties\": {\"prompt\": \"a majestic mountain landscape\"}}"
+                    },
+                    "index": 0
+                  }
+                ]
+              },
+              "expected": {
+                "role": "assistant",
+                "tool_calls": [
+                  {
+                    "type": "function",
+                    "function": {
+                      "name": "generate_image"
+                    }
+                  }
+                ]
+              },
+              "scores": [
+                {
+                  "name": "ToolCallMatch",
+                  "score": 1
+                }
+              ],
+              "createdAt": "2025-10-23T10:51:02.203Z"
+            },
+            {
+              "input": "tell me a dad joke",
+              "output": {
+                "role": "assistant",
+                "content": "",
+                "tool_calls": [
+                  {
+                    "id": "rDII14tku",
+                    "function": {
+                      "name": "dad_joke",
+                      "arguments": "{}"
+                    },
+                    "index": 0
+                  }
+                ]
+              },
+              "expected": {
+                "role": "assistant",
+                "tool_calls": [
+                  {
+                    "type": "function",
+                    "function": {
+                      "name": "dad_joke"
+                    }
+                  }
+                ]
+              },
+              "scores": [
+                {
+                  "name": "ToolCallMatch",
+                  "score": 1
+                }
+              ],
+              "createdAt": "2025-10-23T10:51:02.203Z"
+            },
+            {
+              "input": "what movies did Christopher Nolan direct?",
+              "output": {
+                "role": "assistant",
+                "content": "",
+                "tool_calls": [
+                  {
+                    "id": "tzHtmUq6R",
+                    "function": {
+                      "name": "movieSearch",
+                      "arguments": "{\"_def\": {\"unknownKeys\": \"strip\", \"catchall\": {\"_def\": {\"typeName\": \"ZodNever\"}, \"~standard\": {\"version\": 1, \"vendor\": \"zod\"}}, \"typeName\": \"ZodObject\", \"director\": \"Christopher Nolan\"}}"
+                    },
+                    "index": 0
+                  }
+                ]
+              },
+              "expected": {
+                "role": "assistant",
+                "tool_calls": [
+                  {
+                    "type": "function",
+                    "function": {
+                      "name": "movieSearch"
+                    }
+                  }
+                ]
+              },
+              "scores": [
+                {
+                  "name": "ToolCallMatch",
+                  "score": 1
+                }
+              ],
+              "createdAt": "2025-10-23T10:51:02.203Z"
+            }
+          ],
+          "score": 1,
+          "createdAt": "2025-10-23T10:51:02.203Z"
+        }
+      ]
+    }
+  ]
+}
