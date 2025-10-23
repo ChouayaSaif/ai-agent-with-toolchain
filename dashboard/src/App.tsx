@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, ChangeEvent } from 'react'
 import ExperimentGraph from './components/ExperimentGraph'
 import resultsData from '../../results.json'
 import { Results } from '../../types'
@@ -6,7 +6,7 @@ import './App.css'
 
 const App = () => {
   const results = resultsData as Results
-  const [selectedExperiment, setSelectedExperiment] = useState(
+  const [selectedExperiment, setSelectedExperiment] = useState<string>(
     results.experiments[0].name
   )
 
@@ -30,7 +30,9 @@ const App = () => {
         <select
           id="experiment-select"
           value={selectedExperiment}
-          onChange={(e) => setSelectedExperiment(e.target.value)}
+          onChange={(e: ChangeEvent<HTMLSelectElement>) =>
+            setSelectedExperiment(e.target.value)
+          }
         >
           {results.experiments.map((exp) => (
             <option key={exp.name} value={exp.name}>

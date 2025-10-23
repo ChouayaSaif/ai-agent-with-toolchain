@@ -1,6 +1,11 @@
 import type { AIMessage } from "../types";
 import { generateFromMistral } from "./mistralClient";
 import { systemPrompt } from "./systemPrompt";
+import { getSummary } from "./memory";
+
+
+// Define a default system prompt
+const defaultSystemPrompt = "This is the default system prompt.";
 
 export const runLLM = async ({
   messages,
@@ -12,7 +17,9 @@ export const runLLM = async ({
   tools?: any[];
   temperature?: number;
   model?: string;
+  systemPrompt?: string;
 }) => {
+  const summary = await getSummary()
   // Build the payload for Mistral
   const payload: any = {
     model,
@@ -23,7 +30,7 @@ export const runLLM = async ({
   // ✅ Add system prompt as the first message
   payload.messages.push({
     role: "system",
-    content: systemPrompt,
+    content: `${systemPrompt || defaultSystemPrompt}. Conversation so far: ${summary}`,
   });
 
   // Preprocess messages: remove empty assistant placeholders and dedupe
@@ -71,8 +78,8 @@ export const runLLM = async ({
   const lastRole = lastMsg ? lastMsg.role : null;
   const shouldAttachTools = tools && tools.length > 0 && (lastRole === "user" || lastRole === "tool");
 
-  console.log("LLM last role before attach:", lastRole);
-  console.log("LLM attaching tools?", Boolean(shouldAttachTools));
+  // console.log("LLM last role before attach:", lastRole);
+  // console.log("LLM attaching tools?", Boolean(shouldAttachTools));
 
   if (shouldAttachTools) {
     payload.tools = tools.map((t: any) => {
@@ -92,10 +99,10 @@ export const runLLM = async ({
     payload.parallel_tool_calls = false;
   }
 
-  console.log(
-    "LLM payload messages:",
-    payload.messages.map((m: any, idx: number) => `${idx}:${m.role}:${(m.content || "").slice(0, 40)}`)
-  );
+  // console.log(
+  //   "LLM payload messages:",
+  //   payload.messages.map((m: any, idx: number) => `${idx}:${m.role}:${(m.content || "").slice(0, 40)}`)
+  // );
 
   const rawOutput = await generateFromMistral(payload);
   let output: any = rawOutput;
@@ -159,4 +166,16 @@ export const runApprovalCheck = async (userMessage: string) => {
 
   // Default conservative answer
   return false
+}
+
+
+export const summarizeMessages = async (messages: AIMessage[]) => {
+  const response = await runLLM({
+    systemPrompt:
+      'Summarize the key points of the conversation in a concise way that would be helpful as context for future interactions. Make it like a play by play of the conversation.',
+    messages,
+    temperature: 0.3,
+  })
+
+  return response.content || ''
 }

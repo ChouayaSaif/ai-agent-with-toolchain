@@ -16,13 +16,13 @@ type Args = z.infer<typeof generateImageToolDefinition.parameters>
 
 export const generateImage: ToolFn<Args, string> = async ({ toolArgs }) => {
   try {
-    console.log('Generating image with pollinations.ai:', toolArgs.prompt)
+    // console.log('Generating image with pollinations.ai:', toolArgs.prompt)
     
     // Encode the prompt for URL safety
     const encodedPrompt = encodeURIComponent(toolArgs.prompt)
     const imageUrl = `https://image.pollinations.ai/prompt/${encodedPrompt}?width=512&height=512&nologo=true`
     
-    console.log('Generated image URL:', imageUrl)
+    // console.log('Generated image URL:', imageUrl)
     
     // Verify the image exists by making a HEAD request
     const checkResponse = await fetch(imageUrl, { method: 'HEAD' })

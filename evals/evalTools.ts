@@ -41,11 +41,13 @@ const getDb = async () => {
 const calculateAvgScore = (runs: Run[]) => {
   const totalScores = runs.reduce((sum, run) => {
     const runAvg =
-      run.scores.reduce((sum, score) => sum + score.score, 0) /
-      run.scores.length
+      run.scores.length > 0
+        ? run.scores.reduce((s, score) => s + (score.score ?? 0), 0) /
+          run.scores.length
+        : 0
     return sum + runAvg
   }, 0)
-  return totalScores / runs.length
+  return runs.length > 0 ? totalScores / runs.length : 0
 }
 
 export const loadExperiment = async (
@@ -102,22 +104,26 @@ export const runEval = async <T = any>(
 ) => {
   const results = await Promise.all(
     data.map(async ({ input, expected, reference }) => {
-      const results = await task(input)
-      let context: string | string[]
+      const resultsFromTask: any = await task(input)
+      let context: string | string[] | undefined
       let output: string
 
-      if (results.context) {
-        context = results.context
-        output = results.response
+      if (
+        resultsFromTask &&
+        typeof resultsFromTask === 'object' &&
+        ('context' in resultsFromTask || 'response' in resultsFromTask)
+      ) {
+        if (resultsFromTask.context) context = resultsFromTask.context
+        output = resultsFromTask.response ?? String(resultsFromTask)
       } else {
-        output = results
+        output = String(resultsFromTask)
       }
 
       const scores = await Promise.all(
         scorers.map(async (scorer) => {
           const score = await scorer({
             input,
-            output: results,
+            output: output as any,
             expected,
             reference,
             context,

@@ -20,11 +20,11 @@ export async function generateFromMistral(
   }
 
   // Debug: print outgoing body summary
-  try {
-    console.log('Mistral outgoing body:', JSON.stringify({ model: body.model, messages: (body.messages || []).map((m: any) => ({ role: m.role, content: (m.content || '').slice(0,40) })), tools: body.tools ? body.tools.map((t: any) => t.function?.name || t.name) : undefined, tool_choice: body.tool_choice }, null, 2))
-  } catch (e) {
-    // ignore
-  }
+  // try {
+  //   console.log('Mistral outgoing body:', JSON.stringify({ model: body.model, messages: (body.messages || []).map((m: any) => ({ role: m.role, content: (m.content || '').slice(0,40) })), tools: body.tools ? body.tools.map((t: any) => t.function?.name || t.name) : undefined, tool_choice: body.tool_choice }, null, 2))
+  // } catch (e) {
+  //   // ignore
+  // }
 
   const response = await fetch("https://api.mistral.ai/v1/chat/completions", {
     method: "POST",

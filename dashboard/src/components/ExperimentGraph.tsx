@@ -7,7 +7,7 @@ import {
   Tooltip,
   Legend,
 } from 'recharts'
-import { Experiment } from '../../../src/types/Results'
+import { Experiment } from '../../../types'
 
 interface ExperimentGraphProps {
   experiment: Experiment
