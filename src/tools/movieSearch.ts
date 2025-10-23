@@ -15,8 +15,14 @@ export const movieSearchToolDefinition = {
 
 type Args = z.infer<typeof movieSearchToolDefinition.parameters>
 
-export const movieSearch: ToolFn<Args, string> = async ({ toolArgs }) => {
-  const { query, genre, director } = toolArgs
+export const movieSearch: ToolFn<Args, string> = async ({ toolArgs, userMessage }) => {
+  const { query, genre, director } = toolArgs || {}
+
+  // If the tool call didn't include a query, fall back to the user's message.
+  const searchQuery = (query && String(query).trim()) || (userMessage && String(userMessage).trim())
+  if (!searchQuery) {
+    return 'Error: No query provided for movie search'
+  }
 
   const filters = {
     ...(genre && { genre }),
@@ -25,7 +31,7 @@ export const movieSearch: ToolFn<Args, string> = async ({ toolArgs }) => {
 
   let results
   try {
-    results = await queryMovies(query, filters)
+    results = await queryMovies(searchQuery, filters)
   } catch (error) {
     console.error(error)
     return 'Error: Failed to search for movies'

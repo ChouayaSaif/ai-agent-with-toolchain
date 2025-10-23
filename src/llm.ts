@@ -114,3 +114,49 @@ export const runLLM = async ({
     tool_calls: message?.tool_calls || [],
   };
 };
+
+
+
+
+export const runApprovalCheck = async (userMessage: string) => {
+  const model = 'open-mistral-nemo-2407'
+
+  // Ask the model to return a strict JSON document with only {"approved": true|false}
+  const payload: any = {
+    model,
+    messages: [
+      {
+        role: 'system',
+        content:
+          'You are a validation assistant. Respond with a single JSON object and nothing else. The object must have the boolean field `approved`. If you are unsure, set approved to false.',
+      },
+      { role: 'user', content: `User said: "${userMessage.replace(/"/g, '\\"')}". Did the user explicitly approve the image generation? Respond with JSON only.` },
+    ],
+    temperature: 0.1,
+  }
+
+  const raw = await generateFromMistral(payload)
+  let text = typeof raw === 'string' ? raw.trim() : ''
+
+  // Try to extract JSON from the model output
+  try {
+    // Some models may wrap the JSON in markdown or backticks — attempt to find the first {..}
+    const firstBrace = text.indexOf('{')
+    const lastBrace = text.lastIndexOf('}')
+    if (firstBrace !== -1 && lastBrace !== -1 && lastBrace > firstBrace) {
+      const jsonText = text.slice(firstBrace, lastBrace + 1)
+      const parsed = JSON.parse(jsonText)
+      if (typeof parsed?.approved === 'boolean') return parsed.approved
+    }
+  } catch (e) {
+    // fallthrough to heuristics
+  }
+
+  // Heuristic fallback: look for affirmative / negative words
+  const lower = text.toLowerCase()
+  if (/\b(yes|yep|approved|allow|okay|ok)\b/.test(lower)) return true
+  if (/\b(no|not|deny|deny|don't|do not|reject)\b/.test(lower)) return false
+
+  // Default conservative answer
+  return false
+}

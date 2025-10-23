@@ -35,27 +35,44 @@ export const queryMovies = async (
   filters?: Partial<MovieMetadata>,
   topK: number = 5
 ) => {
-  // Build filter string if filters provided
-  let filterStr = ''
+  // Build a structured filter object if filters provided. Upstash expects
+  // structured filter objects (for example in the `metadata` field), not a
+  // SQL-like string. Send { metadata: filters } so Upstash can apply metadata
+  // filtering.
+  let filterObj: any = undefined
   if (filters) {
-    const filterParts = Object.entries(filters)
-      .filter(([_, value]) => value !== undefined)
-      .map(([key, value]) => `${key}='${value}'`)
-
-    if (filterParts.length > 0) {
-      filterStr = filterParts.join(' AND ')
+    const cleaned: any = {}
+    for (const [k, v] of Object.entries(filters)) {
+      if (v !== undefined) cleaned[k] = v
+    }
+    if (Object.keys(cleaned).length > 0) {
+      filterObj = { metadata: cleaned }
     }
   }
 
   // Query the vector store
   const idx = getIndex()
-  const results = await idx.query({
+  const payload: any = {
     data: query,
     topK,
-    filter: filterStr || undefined,
+    filter: filterObj || undefined,
     includeMetadata: true,
     includeData: true,
-  })
+  }
 
-  return results
+  // Debug: log payload being sent to Upstash (trim long fields)
+  try {
+    console.log('Upstash query payload:', JSON.stringify({
+      data: String(payload.data).slice(0, 200),
+      topK: payload.topK,
+      filter: payload.filter,
+    }, null, 2))
+
+    const results = await idx.query(payload)
+    return results
+  } catch (err: any) {
+    console.error('Upstash query failed:', err?.message || err)
+    // Return empty results instead of throwing so the tool can respond gracefully
+    return []
+  }
 }
