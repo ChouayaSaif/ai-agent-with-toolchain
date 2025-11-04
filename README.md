@@ -1,4 +1,4 @@
-# Build an AI Agent from Scratch Workshop
+# an AI Agent from Scratch
 
 - Making an agent with toolchain capability.
 
